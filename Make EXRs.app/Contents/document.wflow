@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>381</string>
+	<key>AMApplicationVersion</key>
+	<string>2.4</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.1.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>fileNames</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Get Specified Finder Items.action</string>
+				<key>ActionName</key>
+				<string>Hent anførte Finderemner</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>fileNames</key>
+					<array>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8570.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8571.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8572.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8573.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8574.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8575.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8576.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8577.JPG</string>
+						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8578.JPG</string>
+					</array>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.SpecifiedFiles</string>
+				<key>CFBundleVersion</key>
+				<string>1.1.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>SpecifiedFilesAction</string>
+				<key>Disabled</key>
+				<false/>
+				<key>IgnoresInput</key>
+				<false/>
+				<key>InputUUID</key>
+				<string>8B6BBA57-B10A-4C5D-8FAB-0DBBDF51294F</string>
+				<key>Keywords</key>
+				<array>
+					<string>Arkiv</string>
+					<string>Vælg</string>
+					<string>Find</string>
+					<string>Hent</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>9EC3AA5D-0C35-4662-8AEF-2153A9ED9A57</string>
+				<key>UUID</key>
+				<string>FD037D53-3304-48C3-AFB8-A0F7AE454759</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<array/>
+						<key>name</key>
+						<string>fileNames</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>588.000000:939.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/da.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>affirmativeTitle</key>
+					<dict/>
+					<key>displayWarning</key>
+					<dict/>
+					<key>explanationText</key>
+					<dict/>
+					<key>negativeTitle</key>
+					<dict/>
+					<key>questionText</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>Make EXRs</string>
+						</array>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Ask for Confirmation.action</string>
+				<key>ActionName</key>
+				<string>Bed om bekræftelse</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>affirmativeTitle</key>
+					<string>OK</string>
+					<key>displayWarning</key>
+					<false/>
+					<key>explanationText</key>
+					<string>This script makes the high resolution reference HDR files and saves them in the EXR format.
+
+You must either drop a series of HDR pictures with 9 exposures each or a folder containing such a series.
+
+A dropped folder must be the one that contains the captured JPG-files directly itself.
+It is usually called something like 100CANON.
+
+If you think you did what you should, press OK to start the conversion.
+
+… it might take quite a while</string>
+					<key>negativeTitle</key>
+					<string>Annuller</string>
+					<key>questionText</key>
+					<string>Make EXRs</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Ask for Confirmation</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<false/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMAskForConfirmationAction</string>
+				<key>InputUUID</key>
+				<string>3F860DAE-94CB-459A-AECE-340B8F0BFC0C</string>
+				<key>Keywords</key>
+				<array>
+					<string>Besked</string>
+					<string>Spørg</string>
+					<string>Vis</string>
+					<string>Besked</string>
+					<string>Vis</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>AFA98FAC-1032-49E2-B8BF-5C652B13EB25</string>
+				<key>UUID</key>
+				<string>DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>questionText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>displayWarning</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>explanationText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string>OK</string>
+						<key>name</key>
+						<string>affirmativeTitle</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>Annuller</string>
+						<key>name</key>
+						<string>negativeTitle</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>588.000000:701.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Ask for Confirmation.action/Contents/Resources/da.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.0.3</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<dict/>
+					<key>CheckedForUserDefaultShell</key>
+					<dict/>
+					<key>inputMethod</key>
+					<dict/>
+					<key>shell</key>
+					<dict/>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run Shell Script.action</string>
+				<key>ActionName</key>
+				<string>Start Shell-instruks</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<string>for d in "$@"
+do
+  if [ -d "$d" ]; then 
+      # It's a directory!
+      # Directory command goes here.
+      cd "$d"
+      echo " " &gt;&gt; exr.log
+      echo "JOB STARTED" &gt;&gt; exr.log
+      echo "Entering directory $d" &gt;&gt; exr.log
+      textFileCount=$(ls HDR*.txt | wc -l)
+      if [ "$textFileCount" -gt "0" ]; then
+	echo `ls HDR*.txt | /opt/local/bin/parallel /bin/cat {} \| /opt/local/bin/parallel -I xxx echo /usr/local/bin/enfusexxx -o {.}.JPG \| sh  2&gt;&amp;1` &gt;&gt; exr.log
+       else 
+	echo `ls IMG*.JPG | /opt/local/bin/parallel -j4 -n9 /usr/local/bin/enfuse {} -o HDR_{#}.JPG 2&gt;&amp;1` &gt;&gt; exr.log
+      fi
+      exrFileCount=$(ls HDR_*.exr | wc -l)
+      if [ "$exrFileCount" -gt "0" ]; then
+	 echo `ls HDR_*.exr | /opt/local/bin/parallel '/bin/mv {} {.}.full.exr'  2&gt;&amp;1` &gt;&gt; exr.log
+	 mkdir "exr"
+	 mv HDR*.full.exr exr/
+	 open exr
+      fi
+  else
+    filename=$(basename "$d")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    [[ "$extension" == "JPG" ]] &amp;&amp; { looseJpgFiles="$looseJpgFiles$d
+"; }
+    [[ "$extension" == "jpg" ]] &amp;&amp; { looseJpgFiles="$looseJpgFiles$d
+"; }
+  fi
+done
+if [ $(echo "$looseJpgFiles" | wc -l) -gt "1" ]; then
+         firstFile=$(echo "$looseJpgFiles" | head -n 1)
+         dirName=$(dirname "$firstFile")
+         cd "$dirName"
+	 echo " " &gt;&gt; exr.log
+         echo "JOB STARTED" &gt;&gt; exr.log
+         looseJpgFiles="$(echo "$looseJpgFiles" | sed -e '/^$/d' | sort )"
+	 echo "`export PATH=$PATH:/opt/local/bin/:/usr/local/bin/: &amp;&amp; echo "$looseJpgFiles" | /opt/local/bin/parallel -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/jpeg2hdrgen {/} &gt; "$outputName.hdrgen"; ' 2&gt;&amp;1`" &gt;&gt; exr.log
+	 echo "`export PATH=$PATH:/opt/local/bin/:/usr/local/bin/: &amp;&amp; ls *.hdrgen | /opt/local/bin/parallel -n1 'pfsinhdrgen {} | pfshdrcalibrate -s {.}.response.m | pfsoutexr {.}.exr' 2&gt;&amp;1`" &gt;&gt; exr.log
+         # echo "`echo "$looseJpgFiles" | /opt/local/bin/parallel -j4 -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/enfuse {} -o $outputName.JPG; ' 2&gt;&amp;1`" &gt;&gt; exr.log
+         # echo "`ls HDR_*.exr | /opt/local/bin/parallel '/bin/mv {} {.}.full.exr'  2&gt;&amp;1`" &gt;&gt; exr.log
+         # mkdir "exr"
+	 # mv HDR*.full.exr exr/
+	 # open exr
+fi
+echo "JOB DONE" &gt;&gt; exr.log
+echo " " &gt;&gt; exr.log</string>
+					<key>CheckedForUserDefaultShell</key>
+					<true/>
+					<key>inputMethod</key>
+					<integer>1</integer>
+					<key>shell</key>
+					<string>/bin/bash</string>
+					<key>source</key>
+					<string></string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.RunShellScript</string>
+				<key>CFBundleVersion</key>
+				<string>2.0.3</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunShellScriptAction</string>
+				<key>InputUUID</key>
+				<string>638287B0-4782-41CA-A0C5-5E9E75416708</string>
+				<key>Keywords</key>
+				<array>
+					<string>Shell</string>
+					<string>Alfabet</string>
+					<string>Kommando</string>
+					<string>Start</string>
+					<string>Unix</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>04EA63BF-F730-4246-983A-9FA684375063</string>
+				<key>ShowWhenRun</key>
+				<false/>
+				<key>UUID</key>
+				<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>inputMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>CheckedForUserDefaultShell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>COMMAND_STRING</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>/bin/sh</string>
+						<key>name</key>
+						<string>shell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>588.000000:504.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/da.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>message</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>If the resulting folder opened, it worked...</string>
+						</array>
+					</dict>
+					<key>subtitle</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array/>
+					</dict>
+					<key>title</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>EXR job has finished</string>
+						</array>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Display Notification.action</string>
+				<key>ActionName</key>
+				<string>Vis meddelelse</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>message</key>
+					<string>If the resulting folder opened, it worked...</string>
+					<key>subtitle</key>
+					<string></string>
+					<key>title</key>
+					<string>EXR job has finished</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Display-Notification</string>
+				<key>CFBundleVersion</key>
+				<string>1.0</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<false/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMDisplayNotificationAction</string>
+				<key>InputUUID</key>
+				<string>1861FF53-CDD7-4B6F-9432-B95686747C75</string>
+				<key>Keywords</key>
+				<array/>
+				<key>OutputUUID</key>
+				<string>BFD069DA-7E7C-4AFF-8F15-1C19CBE2423D</string>
+				<key>UUID</key>
+				<string>D9307E99-0083-4332-9ACD-846E07154234</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>subtitle</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>title</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>message</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>588.000000:321.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Display Notification.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict>
+		<key>0975389B-9388-4179-AC49-675ABEB2E614</key>
+		<dict>
+			<key>from</key>
+			<string>DE306D44-3188-49C0-94B0-410D6F33F4A0 - DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
+			<key>to</key>
+			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
+		</dict>
+		<key>4EB73143-CFAF-4082-AC71-0A5795786608</key>
+		<dict>
+			<key>from</key>
+			<string>FD037D53-3304-48C3-AFB8-A0F7AE454759 - FD037D53-3304-48C3-AFB8-A0F7AE454759</string>
+			<key>to</key>
+			<string>DE306D44-3188-49C0-94B0-410D6F33F4A0 - DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
+		</dict>
+		<key>52801AA1-5C57-49BF-ACFC-1CE46FC72DFA</key>
+		<dict>
+			<key>from</key>
+			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
+			<key>to</key>
+			<string>D9307E99-0083-4332-9ACD-846E07154234 - D9307E99-0083-4332-9ACD-846E07154234</string>
+		</dict>
+	</dict>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.application</string>
+	</dict>
+</dict>
+</plist>
