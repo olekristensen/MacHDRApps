@@ -107,7 +107,7 @@
 				<key>isViewVisible</key>
 				<false/>
 				<key>location</key>
-				<string>580.500000:1151.000000</string>
+				<string>580.500000:1165.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -286,7 +286,7 @@ If you think you did what you should, press OK to start the conversion.
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>580.500000:1109.000000</string>
+				<string>580.500000:1123.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Ask for Confirmation.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -342,7 +342,20 @@ If you think you did what you should, press OK to start the conversion.
 				<key>ActionParameters</key>
 				<dict>
 					<key>COMMAND_STRING</key>
-					<string>for d in "$@"
+					<string>if [ ! -e ~/Library/Application\ Support/MacHDRApps ] ; then
+	cd ~/Library/Application\ Support
+	mkdir "MacHDRApps";
+fi
+cd ~/Library/Application\ Support/MacHDRApps
+if [ ! -e "pfsCalibrations" ] ; then
+	git clone https://github.com/olekristensen/pfsCalibrations.git
+else
+	cd pfsCalibrations
+	git pull
+fi
+cd
+calibrationsRepo=~/Library/Application\ Support/MacHDRApps/pfsCalibrations
+for d in "$@"
 do
   if [ -d "$d" ]; then 
       # It's a directory!
@@ -361,15 +374,15 @@ do
       fi
       echo "- looking for response files for this camera model" &gt;&gt; exr.log
 
-#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
-      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.luminance.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.luminance.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
       echo "- making exr files" &gt;&gt; exr.log
 
-#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
-      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.luminance.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.robertson.luminance.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.luminance.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.robertson.luminance.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
       echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; pfsinhdrgen {} | pfshdrcreate | pfsoutexr {.}.gamma.debevec.exr'  2&gt;&amp;1` &gt;&gt; exr.log
 
@@ -404,15 +417,15 @@ if [ $(echo "$looseJpgFiles" | wc -l) -gt "1" ]; then
 
       echo "- looking for response files for this camera model" &gt;&gt; exr.log
 
-#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
-      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.luminance.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.luminance.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -s $responseFileName &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
       echo "- making exr files" &gt;&gt; exr.log
 
-#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+#      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
-      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.luminance.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.robertson.luminance.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="$calibrationsRepo/$cameraModel.luminance.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate --luminance -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.calibrated.robertson.luminance.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
 
       echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; pfsinhdrgen {} | pfshdrcreate | pfsoutexr {.}.gamma.debevec.exr'  2&gt;&amp;1` &gt;&gt; exr.log
 
@@ -541,9 +554,93 @@ echo " " &gt;&gt; exr.log</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>580.500000:912.000000</string>
+				<string>580.500000:815.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/da.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict/>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/View Results.action</string>
+				<key>ActionName</key>
+				<string>Vis resultater</string>
+				<key>ActionParameters</key>
+				<dict/>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.LogOutput</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<false/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>LogOutputAction</string>
+				<key>InputUUID</key>
+				<string>48E4F908-433C-4551-90AB-673EA248839E</string>
+				<key>Keywords</key>
+				<array>
+					<string>Vis</string>
+					<string>Vis</string>
+					<string>Log</string>
+					<string>Lyd ud</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>257FA11F-A76D-4360-8CD3-F840CF865FF9</string>
+				<key>StartAction</key>
+				<false/>
+				<key>UUID</key>
+				<string>1A03218B-AEAE-4F4D-8A2A-B238405A6084</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict/>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>580.500000:201.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/View Results.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
 			<true/>
@@ -551,14 +648,21 @@ echo " " &gt;&gt; exr.log</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>040FE149-E4D2-4ED2-BFCE-A10A45381E15</key>
+		<key>1087E23C-5FA0-44B2-8F06-CDCCEB85C62A</key>
 		<dict>
 			<key>from</key>
 			<string>DE306D44-3188-49C0-94B0-410D6F33F4A0 - DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
 			<key>to</key>
 			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
 		</dict>
-		<key>62C0F113-0906-457C-9B5C-68B974DD8A1C</key>
+		<key>71912966-220C-4D22-8EE4-9874DFEE70F3</key>
+		<dict>
+			<key>from</key>
+			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
+			<key>to</key>
+			<string>1A03218B-AEAE-4F4D-8A2A-B238405A6084 - 1A03218B-AEAE-4F4D-8A2A-B238405A6084</string>
+		</dict>
+		<key>B12C7396-C390-417E-B198-4701F04A1337</key>
 		<dict>
 			<key>from</key>
 			<string>FD037D53-3304-48C3-AFB8-A0F7AE454759 - FD037D53-3304-48C3-AFB8-A0F7AE454759</string>
