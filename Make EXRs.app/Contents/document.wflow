@@ -52,15 +52,7 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8570.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8571.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8572.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8573.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8574.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8575.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8576.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8577.JPG</string>
-						<string>/Volumes/LEDlighting RAID disk/2014:04:8-11 AdaptiveLighting ITU/20140501_LEDbox_Photos_Videos/100CANON/IMG_8578.JPG</string>
+						<string>~/Desktop/LEDbox</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -117,7 +109,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>588.000000:939.000000</string>
+				<string>471.500000:1219.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -296,7 +288,7 @@ If you think you did what you should, press OK to start the conversion.
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>588.000000:701.000000</string>
+				<string>471.500000:981.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Ask for Confirmation.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -363,13 +355,20 @@ do
       echo "Entering directory $d" &gt;&gt; exr.log
       textFileCount=$(ls HDR*.txt | wc -l)
       if [ "$textFileCount" -gt "0" ]; then
-	echo `ls HDR*.txt | /opt/local/bin/parallel /bin/cat {} \| /opt/local/bin/parallel -I xxx echo /usr/local/bin/enfusexxx -o {.}.JPG \| sh  2&gt;&amp;1` &gt;&gt; exr.log
+	echo "- text files found: $textFileCount"  &gt;&gt; exr.log
+	echo "- making hdrgens"  &gt;&gt; exr.log
+        echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./HDR*.txt | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
        else 
-	echo `ls IMG*.JPG | /opt/local/bin/parallel -j4 -n9 /usr/local/bin/enfuse {} -o HDR_{#}.JPG 2&gt;&amp;1` &gt;&gt; exr.log
+	echo `ls IMG*.JPG | /usr/local/bin/parallel -j4 -n9 /usr/local/bin/enfuse {} -o HDR_{#}.JPG 2&gt;&amp;1` &gt;&gt; exr.log
       fi
+      echo "- looking for response files for this camera model" &gt;&gt; exr.log
+      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.m" &amp;&amp; if [ ! -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -s $responseFileName --luminance &gt; /dev/null ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+      echo "- making exr files" &gt;&gt; exr.log
+      echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j1 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; cameraModel=$(jhead $fileName | grep "Camera model" | sed -e "s/Camera model : //g" | sed -e "s/ /-/g") &amp;&amp; responseFileName="./$cameraModel.m" &amp;&amp; if [ -e "$responseFileName" ] ; then pfsinhdrgen {} | pfshdrcalibrate -r gamma -c robertson -f $responseFileName | pfsoutexr {.}.exr ; fi'  2&gt;&amp;1` &gt;&gt; exr.log
+
       exrFileCount=$(ls HDR_*.exr | wc -l)
       if [ "$exrFileCount" -gt "0" ]; then
-	 echo `ls HDR_*.exr | /opt/local/bin/parallel '/bin/mv {} {.}.full.exr'  2&gt;&amp;1` &gt;&gt; exr.log
+	 echo `ls HDR_*.exr | /usr/local/bin/parallel '/bin/mv {} {.}.full.exr'  2&gt;&amp;1` &gt;&gt; exr.log
 	 mkdir "exr"
 	 mv HDR*.full.exr exr/
 	 open exr
@@ -391,10 +390,10 @@ if [ $(echo "$looseJpgFiles" | wc -l) -gt "1" ]; then
 	 echo " " &gt;&gt; exr.log
          echo "JOB STARTED" &gt;&gt; exr.log
          looseJpgFiles="$(echo "$looseJpgFiles" | sed -e '/^$/d' | sort )"
-	 echo "`export PATH=$PATH:/opt/local/bin/:/usr/local/bin/: &amp;&amp; echo "$looseJpgFiles" | /opt/local/bin/parallel -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/jpeg2hdrgen {/} &gt; "$outputName.hdrgen"; ' 2&gt;&amp;1`" &gt;&gt; exr.log
-	 echo "`export PATH=$PATH:/opt/local/bin/:/usr/local/bin/: &amp;&amp; ls *.hdrgen | /opt/local/bin/parallel -n1 'pfsinhdrgen {} | pfshdrcalibrate -s {.}.response.m | pfsoutexr {.}.exr' 2&gt;&amp;1`" &gt;&gt; exr.log
-         # echo "`echo "$looseJpgFiles" | /opt/local/bin/parallel -j4 -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/enfuse {} -o $outputName.JPG; ' 2&gt;&amp;1`" &gt;&gt; exr.log
-         # echo "`ls HDR_*.exr | /opt/local/bin/parallel '/bin/mv {} {.}.full.exr'  2&gt;&amp;1`" &gt;&gt; exr.log
+	 echo "`export PATH=$PATH:/usr/local/bin/: &amp;&amp; echo "$looseJpgFiles" | /usr/local/bin/parallel -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/jpeg2hdrgen {/} &gt; "$outputName.hdrgen"; ' 2&gt;&amp;1`" &gt;&gt; exr.log
+	 echo "`export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls *.hdrgen | /usr/local/bin/parallel -n1 'pfsinhdrgen {} | pfshdrcalibrate -s {.}.response.m | pfsoutexr {.}.exr' 2&gt;&amp;1`" &gt;&gt; exr.log
+         # echo "`echo "$looseJpgFiles" | /usr/local/bin/parallel -j4 -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/enfuse {} -o $outputName.JPG; ' 2&gt;&amp;1`" &gt;&gt; exr.log
+         # echo "`ls HDR_*.exr | /usr/local/bin/parallel '/bin/mv {} {.}.full.exr'  2&gt;&amp;1`" &gt;&gt; exr.log
          # mkdir "exr"
 	 # mv HDR*.full.exr exr/
 	 # open exr
@@ -515,7 +514,7 @@ echo " " &gt;&gt; exr.log</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>588.000000:504.000000</string>
+				<string>471.500000:784.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -653,7 +652,7 @@ echo " " &gt;&gt; exr.log</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>588.000000:321.000000</string>
+				<string>471.500000:210.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Display Notification.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -663,21 +662,21 @@ echo " " &gt;&gt; exr.log</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>0975389B-9388-4179-AC49-675ABEB2E614</key>
+		<key>2C9B1271-E506-492B-A031-50120062C5E8</key>
 		<dict>
 			<key>from</key>
 			<string>DE306D44-3188-49C0-94B0-410D6F33F4A0 - DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
 			<key>to</key>
 			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
 		</dict>
-		<key>4EB73143-CFAF-4082-AC71-0A5795786608</key>
+		<key>AF205290-E61D-420D-B19C-158E311D07AC</key>
 		<dict>
 			<key>from</key>
 			<string>FD037D53-3304-48C3-AFB8-A0F7AE454759 - FD037D53-3304-48C3-AFB8-A0F7AE454759</string>
 			<key>to</key>
 			<string>DE306D44-3188-49C0-94B0-410D6F33F4A0 - DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
 		</dict>
-		<key>52801AA1-5C57-49BF-ACFC-1CE46FC72DFA</key>
+		<key>C64AF5FF-0B8B-4792-BBDE-B534CC9CCDA3</key>
 		<dict>
 			<key>from</key>
 			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
