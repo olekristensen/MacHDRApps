@@ -112,7 +112,7 @@
 				<key>isViewVisible</key>
 				<false/>
 				<key>location</key>
-				<string>631.500000:1165.000000</string>
+				<string>471.500000:999.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -291,7 +291,7 @@ If you think you did what you should, press OK to start the conversion.
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>631.500000:1123.000000</string>
+				<string>471.500000:957.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Ask for Confirmation.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -368,12 +368,13 @@ do
       # Directory command goes here.
       cd "$d"
       echo " " &gt;&gt; exr.log
-      echo "JOB STARTED" &gt;&gt; exr.log
+      echo "FOLDER JOB STARTED" &gt;&gt; exr.log
       echo "Entering directory $d" &gt;&gt; exr.log
       textFileCount=$(ls HDR*.txt | wc -l)
       if [ "$textFileCount" -gt "0" ]; then
 	echo "- text files found: $textFileCount"  &gt;&gt; exr.log
 	echo "- making hdrgens"  &gt;&gt; exr.log
+	echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./HDR*.txt | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
         echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./HDR*.txt | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
        else 
 	echo `ls IMG*.JPG | /usr/local/bin/parallel -j4 -n9 /usr/local/bin/enfuse {} -o HDR_{#}.JPG 2&gt;&amp;1` &gt;&gt; exr.log
@@ -414,8 +415,8 @@ if [ $(echo "$looseJpgFiles" | wc -l) -gt "1" ]; then
          dirName=$(dirname "$firstFile")
          cd "$dirName"
 	 echo " " &gt;&gt; exr.log
-         echo "JOB STARTED" &gt;&gt; exr.log
-         echo "Entering directory $dirNames and processing files:" &gt;&gt; exr.log
+         echo "INDIVIDUAL JOB STARTED" &gt;&gt; exr.log
+         echo "Entering directory $dirName and processing files:" &gt;&gt; exr.log
           looseJpgFiles="$(echo "$looseJpgFiles" | sed -e '/^$/d' | sort )"
          echo "$looseJpgFiles" &gt;&gt; exr.log
 	 echo "`export PATH=$PATH:/usr/local/bin/: &amp;&amp; echo "$looseJpgFiles" | /usr/local/bin/parallel -N9 'outputName=$(echo "{1/.}" | sed -e "s/IMG_/HDR_/g" ); /usr/local/bin/jpeg2hdrgen {/} &gt; "$outputName.hdrgen"; ' 2&gt;&amp;1`" &gt;&gt; exr.log
@@ -558,7 +559,7 @@ echo " " &gt;&gt; exr.log</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>631.500000:815.000000</string>
+				<string>471.500000:760.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -627,8 +628,6 @@ echo " " &gt;&gt; exr.log</string>
 				</array>
 				<key>OutputUUID</key>
 				<string>257FA11F-A76D-4360-8CD3-F840CF865FF9</string>
-				<key>StartAction</key>
-				<false/>
 				<key>UUID</key>
 				<string>1A03218B-AEAE-4F4D-8A2A-B238405A6084</string>
 				<key>UnlocalizedApplications</key>
@@ -637,12 +636,10 @@ echo " " &gt;&gt; exr.log</string>
 				</array>
 				<key>arguments</key>
 				<dict/>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>631.500000:201.000000</string>
+				<string>471.500000:201.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/View Results.action/Contents/Resources/da.lproj/main.nib</string>
 			</dict>
@@ -652,21 +649,21 @@ echo " " &gt;&gt; exr.log</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>1087E23C-5FA0-44B2-8F06-CDCCEB85C62A</key>
+		<key>2513036C-39BC-4C94-8B24-3A74F1EB6BA6</key>
 		<dict>
 			<key>from</key>
 			<string>DE306D44-3188-49C0-94B0-410D6F33F4A0 - DE306D44-3188-49C0-94B0-410D6F33F4A0</string>
 			<key>to</key>
 			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
 		</dict>
-		<key>71912966-220C-4D22-8EE4-9874DFEE70F3</key>
+		<key>438CC4EF-5055-4691-A5EC-B431AD5D5ED8</key>
 		<dict>
 			<key>from</key>
 			<string>AAAE38F9-AE46-4789-88C0-C78501D3A94B - AAAE38F9-AE46-4789-88C0-C78501D3A94B</string>
 			<key>to</key>
 			<string>1A03218B-AEAE-4F4D-8A2A-B238405A6084 - 1A03218B-AEAE-4F4D-8A2A-B238405A6084</string>
 		</dict>
-		<key>B12C7396-C390-417E-B198-4701F04A1337</key>
+		<key>77209027-FB72-48FB-A5C7-CDFCA4922FB6</key>
 		<dict>
 			<key>from</key>
 			<string>FD037D53-3304-48C3-AFB8-A0F7AE454759 - FD037D53-3304-48C3-AFB8-A0F7AE454759</string>
