@@ -370,14 +370,16 @@ do
       echo " " &gt;&gt; exr.log
       echo "FOLDER JOB STARTED" &gt;&gt; exr.log
       echo "Entering directory $d" &gt;&gt; exr.log
-      textFileCount=$(ls HDR*.txt | wc -l)
+      textFileCount=$(find . -iname 'HDR*.TXT' -maxdepth 1 | wc -l)
+      if [ "$textFileCount" -lt "1" ]; then
+   	echo `find . -iname 'IMG*.JPG' -maxdepth 1 | /usr/local/bin/parallel -j1 -n9 'fileName=$(echo {0.} | sed -e "s/IMG_/HDR_/g") &amp;&amp; /bin/echo " {}" &gt; "$fileName.txt"' 2&gt;&amp;1` &gt;&gt; exr.log
+      fi
+      textFileCount=$(find . -iname 'HDR*.TXT' -maxdepth 1 | wc -l)
       if [ "$textFileCount" -gt "0" ]; then
 	echo "- text files found: $textFileCount"  &gt;&gt; exr.log
 	echo "- making hdrgens"  &gt;&gt; exr.log
-	echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./HDR*.txt | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
-        echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./HDR*.txt | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
-       else 
-	echo `ls IMG*.JPG | /usr/local/bin/parallel -j4 -n9 /usr/local/bin/enfuse {} -o HDR_{#}.JPG 2&gt;&amp;1` &gt;&gt; exr.log
+	echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; find . -iname 'HDR*.TXT' -maxdepth 1 | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
+        echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; find . -iname 'HDR*.TXT' -maxdepth 1 | /usr/local/bin/parallel '/bin/cat {}' \| /usr/local/bin/parallel -I xxx 'echo "/usr/local/bin/jpeg2hdrgenxxx \&gt; {.}.hdrgen"' \| sh  2&gt;&amp;1` &gt;&gt; exr.log
       fi
       echo "- looking for response files for this camera model" &gt;&gt; exr.log
 
@@ -394,10 +396,11 @@ do
       echo `export PATH=$PATH:/usr/local/bin/: &amp;&amp; ls ./*.hdrgen | /usr/local/bin/parallel -n1 -j4 'fileName=$(echo "{.}.JPG" | sed -e "s/HDR_/IMG_/g") &amp;&amp; pfsinhdrgen {} | pfshdrcreate | pfsoutexr {.}.gamma.debevec.exr'  2&gt;&amp;1` &gt;&gt; exr.log
 
 
-      exrFileCount=$(ls HDR_*.exr | wc -l)
+      exrFileCount=$(find . -iname 'HDR*.EXR' -maxdepth 1 | wc -l)
       if [ "$exrFileCount" -gt "0" ]; then
 	 mkdir "exr"
 	 mv HDR*.exr exr/
+	 mv HDR*.EXR exr/
 	 open exr
       fi
   else
